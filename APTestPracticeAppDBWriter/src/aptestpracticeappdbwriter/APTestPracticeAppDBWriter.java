@@ -13,6 +13,7 @@ public class APTestPracticeAppDBWriter
     public static void main(String[] args) throws IOException
     {
         DynamoHandler db = new DynamoHandler();
+        db.incrementVersion();
         //First thing is increment version
         Scanner sc = new Scanner(new File("/Users/spencersharp/Desktop/APTestPracticeAppInput.txt"));
         
@@ -85,6 +86,7 @@ public class APTestPracticeAppDBWriter
         db.setQuestions(questions);
         out.println(db.getQuestions());
         db.setAnswerChoices(answerChoices);
+        out.println(db.getVersion());
         
         
         
