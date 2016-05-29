@@ -97,8 +97,6 @@ public class Subject
         return ret;
     }
 
-
-
     /*
     @DynamoDBAttribute(attributeName = "questionIDs")
     public String getQuestionIDsString()
@@ -128,5 +126,4 @@ public class Subject
         return questions;
     }
     */
-
 }

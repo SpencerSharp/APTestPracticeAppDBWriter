@@ -7,11 +7,14 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by spencersharp on 5/16/16.
@@ -19,9 +22,14 @@ import java.util.Map;
 public class DynamoHandler
 {
     DynamoDBMapper mapper;
-    public DynamoHandler()
+    public DynamoHandler() throws IOException
     {
-        AWSCredentials credentials = new BasicAWSCredentials("AKIAIN66QOVMITPCYOHQ","XngW64gUlhcVWf8SOkrc5dojccYg8SjRENaQClhJ");
+        
+        Scanner sc = new Scanner(new File("credentials.txt"));
+        String accessKey = sc.next();
+        String secretKey = sc.next();
+        //AWSCredentials credentials = new BasicAWSCredentials(""+R.string.db_accessKey,""+R.string.db_accessKey);
+        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(credentials).withEndpoint("dynamodb.us-west-2.amazonaws.com");
         mapper = new DynamoDBMapper(client);
     }
