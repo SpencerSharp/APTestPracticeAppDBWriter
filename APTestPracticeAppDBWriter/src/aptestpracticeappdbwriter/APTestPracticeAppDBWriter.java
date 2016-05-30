@@ -1,5 +1,6 @@
 package aptestpracticeappdbwriter;
 
+import static aptestpracticeappdbwriter.DynamoHandler.cutDash;
 import static java.lang.System.out;
 import java.io.*;
 import java.util.*;
@@ -92,11 +93,32 @@ public class APTestPracticeAppDBWriter
         
         out.println(db.getAnswerChoices());
 
-        /*sc = new Scanner(new File("/Users/spencersharp/Desktop/APTestPracticeAppUserData.txt"));
+        ArrayList<Student> students = new ArrayList<Student>();
+        ArrayList<QuestionData> questionDataList = new ArrayList<QuestionData>();
+        sc = new Scanner(new File("/Users/spencersharp/Desktop/APTestPracticeAppUserData.txt"));
+        long studentID = 0;
+        long questionDataID = 0;
         while(sc.hasNext())
         {
-            
-        }*/
+            String curLine = sc.nextLine();
+            String username = curLine.substring(9);
+            curLine = sc.nextLine();
+            String password = curLine.substring(10);
+            String s = "";
+            for(Question question : questions)
+            {
+                QuestionData questionData = new QuestionData(questionDataID++,question.getID(),question.getCorrectAnswerChoice(),0);
+                s+=questionData.getID()+"-";
+                questionDataList.add(questionData);
+            }
+            s=cutDash(s);
+            Student student = new Student(studentID++, username, password,"0",s);
+            students.add(student);
+        }
+        out.println(db.setStudents(students));
+        out.println(db.getStudents());
+        out.println(db.setQuestionData(questionDataList));
+        out.println(db.getQuestionData());
     }
     
     public static String cutDash(String s)
