@@ -34,31 +34,44 @@ public class DynamoHandler
         mapper = new DynamoDBMapper(client);
     }
 
+
+
+
+
+    //Version code
     public void incrementVersion()
     {
-        Version version = new Version();
-        try{
-            version = mapper.load(Version.class,0);
-            version.increment();
-        }catch(Exception e)
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Version> scanVersions = mapper.scan(Version.class,scanExpression);
+        long maxVersion = 0;
+        for(Version v : scanVersions)
         {
-            version = new Version(0);
+            if(v.getVersion()>maxVersion)
+                maxVersion = v.getVersion();
+            mapper.delete(v);
         }
+        Version version = new Version(maxVersion+1);
         mapper.save(version);
     }
 
     public long getVersion()
     {
-        Version version = mapper.load(Version.class,0);
-
-        return version.getVersion();
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        PaginatedScanList<Version> scanVersions = mapper.scan(Version.class,scanExpression);
+        long maxVersion = 0;
+        for(Version v : scanVersions)
+        {
+            if(v.getVersion()>maxVersion)
+                maxVersion = v.getVersion();
+        }
+        return maxVersion;
     }
 
 
 
 
 
-    //Login info method
+    //Login info methods
     public boolean tryRegister(String username, String password)
     {
         ArrayList<Student> students = getStudents();

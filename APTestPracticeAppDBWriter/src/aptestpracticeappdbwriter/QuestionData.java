@@ -17,7 +17,7 @@ public class QuestionData
     {
         userPrevChoice = 0;
     }
-    
+
     public QuestionData(long id, long questionID, int correctAnswerChoice, int userPrevChoice)
     {
         this.id = id;
@@ -42,7 +42,7 @@ public class QuestionData
     {
         return questionID;
     }
-    
+
     public void setQuestionID(long questionID)
     {
         this.questionID = questionID;
@@ -89,14 +89,14 @@ public class QuestionData
         return false;
     }
     */
-    
+
     @DynamoDBIgnore
     public QuestionData clone()
     {
         QuestionData questionData = new QuestionData(id, questionID, correctAnswerChoice, userPrevChoice);
         return questionData;
     }
-    
+
     @DynamoDBIgnore
     public String toString()
     {

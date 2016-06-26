@@ -22,10 +22,10 @@ public class APTestPracticeAppDBWriter
         ArrayList<Topic> topics = new ArrayList<Topic>();
         ArrayList<Question> questions = new ArrayList<Question>();
         ArrayList<AnswerChoice> answerChoices = new ArrayList<AnswerChoice>();
-        long subjectID = 0;
-        long topicID = 0;
-        long questionID = 0;
-        long answerChoiceID = 0;
+        long subjectID = 1;
+        long topicID = 1;
+        long questionID = 1;
+        long answerChoiceID = 1;
         while(sc.hasNext())
         {
             String subjectNameLine = sc.nextLine();
@@ -96,8 +96,8 @@ public class APTestPracticeAppDBWriter
         ArrayList<Student> students = new ArrayList<Student>();
         ArrayList<QuestionData> questionDataList = new ArrayList<QuestionData>();
         sc = new Scanner(new File("/Users/spencersharp/Desktop/APTestPracticeAppUserData.txt"));
-        long studentID = 0;
-        long questionDataID = 0;
+        long studentID = 1;
+        long questionDataID = 1;
         while(sc.hasNext())
         {
             String curLine = sc.nextLine();

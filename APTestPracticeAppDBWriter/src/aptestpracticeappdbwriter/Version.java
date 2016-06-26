@@ -8,12 +8,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 public class Version
 {
     public long version;
-    
+
     public Version()
     {
         
     }
-    
+
     public Version(long v)
     {
         version = v;
@@ -24,12 +24,12 @@ public class Version
     {
         return version;
     }
-    
+
     public void setVersion(long v)
     {
         version = v;
     }
-    
+
     @DynamoDBIgnore
     public void increment()
     {
